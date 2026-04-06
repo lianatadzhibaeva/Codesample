@@ -66,11 +66,12 @@ is discussed in the paper.
 migration-spending-did/
 ├── README.md
 ├── code/
-│   ├── 00_master.do          # runs everything end to end
+│   ├── 00_master.do          # runs the Stata pipeline end to end
 │   ├── 01_build_migrants.do  # append migration modules across waves
 │   ├── 02_build_spendings.do # append expenditure modules across waves
 │   ├── 03_construct_panel.do # merge, define treatment, build outcomes
-│   └── 04_analysis.do        # DiD, pre-trend test, placebo, robustness
+│   ├── 04_analysis.do        # DiD, pre-trend test, placebo, robustness (Stata)
+│   └── 04_analysis.R         # same analysis in R using fixest and ggplot2
 ├── raw_data/                 # LiK data (not included, see above)
 ├── analysis/                 # intermediate .dta files (generated)
 ├── figures/                  # trend plots (generated)
@@ -79,19 +80,28 @@ migration-spending-did/
 
 ## Requirements
 
+Stata pipeline:
 - Stata 17 or later
 - `reghdfe` (Correia) — `ssc install reghdfe`
 - `ftools` (dependency of reghdfe) — `ssc install ftools`
 - `estout` — `ssc install estout`
 
+R analysis (optional, replicates section 4 of the Stata code):
+- R 4.0 or later
+- `haven`, `dplyr`, `fixest`, `modelsummary`, `ggplot2`
+
 ## How to run
 
-1. Install the packages above.
+1. Install the Stata packages above.
 2. Place the LiK data under `raw_data/` as described.
 3. Open `code/00_master.do`, set `global root` to your local repo path, and run.
+4. Optionally, run `code/04_analysis.R` after the Stata pipeline has produced
+   `analysis/final_data.dta`. Set the `root` variable at the top of the R
+   script to the same path.
 
 All intermediate datasets, figures, and tables are written to `analysis/`,
-`figures/`, and `tables/`.
+`figures/`, and `tables/`. R outputs are suffixed with `_R` to keep them
+distinct from the Stata outputs.
 
 ## References
 
