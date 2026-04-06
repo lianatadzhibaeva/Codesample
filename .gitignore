@@ -1,0 +1,20 @@
+# Raw data (LiK is under restricted access — do not commit)
+raw_data/
+*.dta
+!**/.gitkeep
+
+# Generated outputs
+analysis/*.dta
+figures/*.png
+figures/*.pdf
+tables/*.tex
+
+# Stata artefacts
+*.smcl
+*.log
+
+# OS / editor
+.DS_Store
+Thumbs.db
+.vscode/
+.idea/
